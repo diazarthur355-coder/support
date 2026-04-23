@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Structura — Support</title>
+<style>
+:root {
+  --bg: #0b0f1a;
+  --bg2: #111827;
+  --bg3: #1e293b;
+  --accent: #38bdf8;
+  --green: #22c55e;
+  --red: #ef4444;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Header */
+.logo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.logo h1 {
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logo p {
+  color: var(--text2);
+  margin-top: 8px;
+}
+
+/* Cards */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--bg3);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card p, .card li {
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card li:last-child { border-bottom: none; }
+
+/* Boutons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 12px;
+  transition: 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #0b0f1a;
+}
+
+.btn-primary:hover {
+  background: #7dd3fc;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+.btn-secondary:hover {
+  background: #334155;
+}
+
+/* Status */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(34,197,94,0.15);
+  color: var(--green);
+  border: 1px solid rgba(34,197,94,0.3);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: var(--text2);
+  font-size: 12px;
+  margin-top: 40px;
+}
+
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .logo h1 { font-size: 24px; }
+  .card { padding: 18px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo">
+    <h1>🛠️ Structura Support</h1>
+    <p>Centre d'aide et documentation du bot</p>
+    <span class="status" style="margin-top:12px;">
+      <span class="status-dot"></span> Bot opérationnel
+    </span>
+  </div>
+
+  <div class="card">
+    <h2>📚 Commandes disponibles</h2>
+    <ul>
+      <li>💬 <strong>/generer</strong> — Génère une structure de serveur par thème</li>
+      <li>🏗️ <strong>/creer_serveur</strong> — Crée des salons via formulaire</li>
+      <li>📋 <strong>/template</strong> — Applique un template prédéfini</li>
+      <li>🖥️ <strong>/site_live</strong> — Ouvre le dashboard web</li>
+      <li>📤 <strong>/snapshot</strong> — Exporte la structure en fichier</li>
+      <li>🗑️ <strong>/reset_serveur</strong> — Reset total (attention !)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>❓ Problèmes fréquents</h2>
+    <ul>
+      <li>🔧 <strong>Le bot ne répond pas</strong> → Vérifie ses permissions (Admin + Gérer les salons)</li>
+      <li>🔧 <strong>/site_live ne charge pas</strong> → Vérifie que le webhook a bien été créé</li>
+      <li>🔧 <strong>Erreur "Forbidden"</strong> → Le bot doit être au-dessus des rôles à gérer</li>
+      <li>🔧 <strong>Quota Gemini dépassé</strong> → Le bot passe automatiquement en mode local</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>🔗 Liens utiles</h2>
+    <p>Tu as besoin d'aide supplémentaire ? Rejoins le serveur de support ou consulte la documentation.</p>
+    <div style="margin-top:12px;">
+      <a href="https://discord.gg/TONLIEN" class="btn btn-primary" target="_blank">💬 Serveur Discord</a>
+      <a href="https://diazarthur355-coder.github.io/teste/" class="btn btn-secondary" target="_blank">🖥️ Dashboard</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📨 Contact</h2>
+    <p>Pour signaler un bug ou proposer une fonctionnalité :</p>
+    <ul>
+      <li>📧 Email : support@structura.bot</li>
+      <li>🐛 GitHub Issues : github.com/diazarthur355-coder/structura</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Structura Bot © 2026 — Fait avec ❤️ par <a href="#">diazarthur355</a></p>
+</div>
+
+</body>
+</html>
