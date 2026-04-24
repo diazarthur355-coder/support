@@ -1,20 +1,25 @@
 
-html_updated = '''<!DOCTYPE html>
+html_final = '''<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Structura — Support</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 :root {
-  --bg: #0b0f1a;
-  --bg2: #111827;
-  --bg3: #1e293b;
+  --bg: #0a0e1a;
+  --bg2: #0f1629;
+  --bg3: #1a2332;
   --accent: #38bdf8;
+  --accent2: #818cf8;
   --green: #22c55e;
   --red: #ef4444;
+  --gold: #fbbf24;
   --text: #f1f5f9;
   --text2: #94a3b8;
+  --text3: #64748b;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -22,215 +27,652 @@ html_updated = '''<!DOCTYPE html>
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
+  overflow-x: hidden;
+  position: relative;
 }
 
+/* ════════════════════════════════════════════════════════
+   HALOS DE LUMIÈRE ANIMÉS
+   ════════════════════════════════════════════════════════ */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 20s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(56,189,248,0.6), transparent 70%);
+  top: -100px; left: -100px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(129,140,248,0.5), transparent 70%);
+  bottom: 10%; right: -50px;
+  animation-delay: -7s;
+  animation-duration: 25s;
+}
+
+.orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(34,197,94,0.4), transparent 70%);
+  top: 40%; left: 30%;
+  animation-delay: -14s;
+  animation-duration: 18s;
+}
+
+.orb-4 {
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(251,191,36,0.3), transparent 70%);
+  bottom: -50px; left: 20%;
+  animation-delay: -5s;
+  animation-duration: 22s;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.1); }
+  50% { transform: translate(-20px, 30px) scale(0.95); }
+  75% { transform: translate(40px, 20px) scale(1.05); }
+}
+
+/* Grille subtile */
+.grid-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ════════════════════════════════════════════════════════
+   CONTENU PRINCIPAL
+   ════════════════════════════════════════════════════════ */
 .container {
-  max-width: 700px;
+  max-width: 900px;
   width: 100%;
+  margin: 0 auto;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 2;
 }
 
-.logo {
+/* Header */
+.hero {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 50px;
+  position: relative;
 }
 
-.logo h1 {
-  font-size: 32px;
-  display: flex;
+.hero-badge {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(34,197,94,0.1);
+  color: var(--green);
+  border: 1px solid rgba(34,197,94,0.2);
+  margin-bottom: 20px;
+  animation: glowPulse 3s ease-in-out infinite;
 }
 
-.logo p {
+.hero-badge::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: dotPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(34,197,94,0.2); }
+  50% { box-shadow: 0 0 20px rgba(34,197,94,0.4); }
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--text), var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -1px;
+}
+
+.hero p {
   color: var(--text2);
-  margin-top: 8px;
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
 }
 
+/* ════════════════════════════════════════════════════════
+   CARTES AVEC EFFETS NÉON
+   ════════════════════════════════════════════════════════ */
 .card {
   background: var(--bg2);
-  border: 1px solid var(--bg3);
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 16px;
-  transition: 0.2s;
+  border: 1px solid rgba(56,189,248,0.1);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  border-color: rgba(56,189,248,0.3);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px rgba(0,0,0,0.3),
+    0 0 30px rgba(56,189,248,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: rgba(56,189,248,0.1);
+  border: 1px solid rgba(56,189,248,0.2);
 }
 
 .card h2 {
   font-size: 18px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-weight: 700;
+  color: var(--text);
 }
 
-.card p, .card li {
+/* ════════════════════════════════════════════════════════
+   TABLE DES COMMANDES
+   ════════════════════════════════════════════════════════ */
+.cmd-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+
+.cmd-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(15,22,41,0.6);
+  border-radius: 10px;
+  margin-bottom: 6px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+  cursor: default;
+}
+
+.cmd-row:hover {
+  background: rgba(56,189,248,0.05);
+  border-color: rgba(56,189,248,0.15);
+  transform: translateX(4px);
+}
+
+.cmd-name {
+  font-family: 'SF Mono', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  min-width: 180px;
+  padding: 4px 10px;
+  background: rgba(56,189,248,0.08);
+  border-radius: 6px;
+  border: 1px solid rgba(56,189,248,0.15);
+}
+
+.cmd-desc {
   color: var(--text2);
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  flex: 1;
+  padding-left: 16px;
 }
 
-.card ul {
-  list-style: none;
-  padding: 0;
+.cmd-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.card li {
-  padding: 8px 0;
-  border-bottom: 1px solid var(--bg3);
+.tag-admin { background: rgba(239,68,68,0.15); color: var(--red); }
+.tag-mod { background: rgba(251,191,36,0.15); color: var(--gold); }
+.tag-public { background: rgba(34,197,94,0.15); color: var(--green); }
+
+/* ════════════════════════════════════════════════════════
+   SECTION FAQ
+   ════════════════════════════════════════════════════════ */
+.faq-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(148,163,184,0.1);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.faq-item:last-child { border-bottom: none; }
+
+.faq-icon {
+  width: 28px; height: 28px;
+  border-radius: 6px;
+  background: rgba(56,189,248,0.1);
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.card li:last-child { border-bottom: none; }
+.faq-content strong {
+  color: var(--text);
+  font-size: 14px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.faq-content p {
+  color: var(--text2);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════════════════════════════
+   BOUTONS STYLÉS
+   ════════════════════════════════════════════════════════ */
+.btn-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
 
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
-  margin-top: 12px;
-  transition: 0.2s;
+  transition: all 0.3s;
   border: none;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s;
+}
+
+.btn:hover::after {
+  left: 100%;
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #0b0f1a;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: var(--bg);
+  box-shadow: 0 4px 20px rgba(56,189,248,0.3);
 }
 
 .btn-primary:hover {
-  background: #7dd3fc;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(56,189,248,0.4);
 }
 
 .btn-secondary {
   background: var(--bg3);
   color: var(--text);
+  border: 1px solid rgba(148,163,184,0.2);
 }
 
 .btn-secondary:hover {
-  background: #334155;
+  background: #253049;
+  border-color: rgba(56,189,248,0.3);
+  transform: translateY(-2px);
 }
 
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  background: rgba(34,197,94,0.15);
-  color: var(--green);
-  border: 1px solid rgba(34,197,94,0.3);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  background: var(--green);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
+/* ════════════════════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════════════════════ */
 .footer {
   text-align: center;
-  color: var(--text2);
+  color: var(--text3);
   font-size: 12px;
-  margin-top: 40px;
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(148,163,184,0.1);
 }
 
 .footer a {
   color: var(--accent);
   text-decoration: none;
+  transition: color 0.2s;
 }
 
-.footer a:hover { text-decoration: underline; }
+.footer a:hover { color: var(--text); }
 
+/* ════════════════════════════════════════════════════════
+   ANIMATIONS ENTRÉE
+   ════════════════════════════════════════════════════════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════════════════════ */
 @media (max-width: 600px) {
-  .logo h1 { font-size: 24px; }
-  .card { padding: 18px; }
+  .hero h1 { font-size: 28px; }
+  .cmd-name { min-width: 140px; font-size: 11px; }
+  .cmd-desc { font-size: 12px; }
+  .card { padding: 20px; }
+  .btn-group { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
 }
+
+/* Scrollbar stylisée */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }
 </style>
 </head>
 <body>
 
+<!-- Halos de lumière -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="orb orb-4"></div>
+<div class="grid-overlay"></div>
+
 <div class="container">
 
-  <div class="logo">
+  <!-- HEADER -->
+  <div class="hero">
+    <div class="hero-badge">Bot opérationnel</div>
     <h1>🛠️ Structura Support</h1>
-    <p>Centre d'aide et documentation du bot</p>
-    <span class="status" style="margin-top:12px;">
-      <span class="status-dot"></span> Bot opérationnel
-    </span>
+    <p>Centre d'aide et documentation complète du bot Discord tout-en-un pour la gestion de serveurs</p>
   </div>
 
+  <!-- COMMANDES STRUCTURE -->
   <div class="card">
-    <h2>📚 Commandes disponibles</h2>
-    <ul>
-      <li>💬 <strong>/generer</strong> — Génère une structure de serveur par thème</li>
-      <li>🏗️ <strong>/creer_Serveur</strong> — Crée des salons via formulaire</li>
-      <li>📋 <strong>/template</strong> — Applique un Template prédéfini</li>
-      <li>🖥️ <strong>/Site_Live</strong> — Ouvre le dashboard web</li>
-      <li>📤 <strong>/Snapshot</strong> — Exporte la structure en fichier</li>
-      <li>🗑️ <strong>/Reset_Serveur</strong> — Reset total (attention !)</li>
-    </ul>
+    <div class="card-header">
+      <div class="card-icon">🏗️</div>
+      <h2>Structure & Serveur</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Generer</span><span class="cmd-desc">Génère une structure de serveur par thème via IA (Gemini)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Creer_Serveur</span><span class="cmd-desc">Crée des catégories et salons via formulaire modal</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Template</span><span class="cmd-desc">Applique un template prédéfini (gaming, business, school...)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Build</span><span class="cmd-desc">Crée manuellement des salons (texte libre, legacy)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Snapshot</span><span class="cmd-desc">Sauvegarde la structure actuelle en fichier texte</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Organise</span><span class="cmd-desc">Trie les salons alphabétiquement dans chaque catégorie</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Site_Live</span><span class="cmd-desc">Génère le lien vers le dashboard web de gestion</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Export_Structure</span><span class="cmd-desc">Exporte l'architecture complète du serveur</span><span class="cmd-tag tag-public">Public</span></div>
+    </div>
   </div>
 
+  <!-- COMMANDES MODÉRATION -->
   <div class="card">
-    <h2>❓ Problèmes fréquents</h2>
-    <ul>
-      <li>🔧 <strong>Le bot ne répond pas</strong> → Vérifie ses permissions (Admin + Gérer les salons)</li>
-      <li>🔧 <strong>/Site_Live ne charge pas</strong> → Vérifie que le webhook a bien été créé</li>
-      <li>🔧 <strong>Erreur "Forbidden"</strong> → Le bot doit être au-dessus des rôles à gérer</li>
-      <li>🔧 <strong>Quota Gemini dépassé</strong> → Le bot passe automatiquement en mode local</li>
-    </ul>
+    <div class="card-header">
+      <div class="card-icon">🛡️</div>
+      <h2>Modération</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Warn</span><span class="cmd-desc">Avertir un membre avec raison</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Warns</span><span class="cmd-desc">Voir l'historique des avertissements d'un membre</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Clear_Warns</span><span class="cmd-desc">Effacer tous les avertissements d'un membre</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Kick</span><span class="cmd-desc">Expulser un membre du serveur</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Ban</span><span class="cmd-desc">Bannir un membre (option suppression messages)</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Unban</span><span class="cmd-desc">Débannir un utilisateur par ID</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Mute</span><span class="cmd-desc">Rendre muet temporairement (timeout)</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Unmute</span><span class="cmd-desc">Retirer le mute d'un membre</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Clear</span><span class="cmd-desc">Supprimer des messages en masse (max 100)</span><span class="cmd-tag tag-mod">Modo</span></div>
+    </div>
   </div>
 
+  <!-- COMMANDES RÔLES -->
   <div class="card">
-    <h2>🔗 Liens utiles</h2>
-    <p>Besoin d'aide ? Rejoins le serveur Discord de support ou retourne sur le dashboard.</p>
-    <div style="margin-top:12px;">
+    <div class="card-header">
+      <div class="card-icon">🎭</div>
+      <h2>Rôles</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Creer_Roles</span><span class="cmd-desc">Crée plusieurs rôles colorés (séparés par virgules)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Boutons_Roles</span><span class="cmd-desc">Crée un message interactif avec boutons pour obtenir des rôles</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Auto_Role</span><span class="cmd-desc">Configure un rôle attribué automatiquement à l'arrivée</span><span class="cmd-tag tag-admin">Admin</span></div>
+    </div>
+  </div>
+
+  <!-- COMMANDES SUPPRESSION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">⚠️</div>
+      <h2>Suppression (Danger)</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Supprimer_Categories</span><span class="cmd-desc">Supprime toutes les catégories et leurs salons</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Supprimer_Salons</span><span class="cmd-desc">Supprime tous les salons textuels et vocaux</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Supprimer_Roles</span><span class="cmd-desc">Supprime tous les rôles personnalisés</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Reset_Serveur</span><span class="cmd-desc">RESET TOTAL — supprime tout (salons, catégories, rôles)</span><span class="cmd-tag tag-admin">Admin</span></div>
+    </div>
+  </div>
+
+  <!-- COMMANDES XP -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📊</div>
+      <h2>XP & Niveaux</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Niveau</span><span class="cmd-desc">Voir ton niveau, XP et barre de progression</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Classement</span><span class="cmd-desc">Classement XP du serveur (Top 10)</span><span class="cmd-tag tag-public">Public</span></div>
+    </div>
+  </div>
+
+  <!-- COMMANDES ÉCONOMIE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">💰</div>
+      <h2>Économie</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Solde</span><span class="cmd-desc">Voir ton solde (portefeuille + banque)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Daily</span><span class="cmd-desc">Récupère ta récompense quotidienne (100-500 coins)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Donner</span><span class="cmd-desc">Transférer des coins à un membre</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Rich</span><span class="cmd-desc">Classement des membres les plus riches (Top 10)</span><span class="cmd-tag tag-public">Public</span></div>
+    </div>
+  </div>
+
+  <!-- COMMANDES TICKETS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🎫</div>
+      <h2>Tickets</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Setup_Tickets</span><span class="cmd-desc">Configure le système de tickets dans un salon</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">(Bouton)</span><span class="cmd-desc">Ouvrir un ticket — formulaire avec sujet et description</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">(Bouton)</span><span class="cmd-desc">Fermer le ticket — suppression du salon après 5s</span><span class="cmd-tag tag-public">Public</span></div>
+    </div>
+  </div>
+
+  <!-- COMMANDES GIVEAWAY -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🎉</div>
+      <h2>Giveaway</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Giveaway</span><span class="cmd-desc">Lancer un giveaway avec lot, durée et nombre de gagnants</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">(Réaction 🎉)</span><span class="cmd-desc">Participer au giveaway en cliquant sur la réaction</span><span class="cmd-tag tag-public">Public</span></div>
+    </div>
+  </div>
+
+  <!-- COMMANDES CONFIGURATION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">⚙️</div>
+      <h2>Configuration</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Config_Logs</span><span class="cmd-desc">Définir le salon des logs (messages supprimés/modifiés, bans...)</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Config_Bienvenue</span><span class="cmd-desc">Configurer le message de bienvenue (titre, description, couleur)</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Config_Depart</span><span class="cmd-desc">Définir le salon des messages de départ</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Config_Niveaux</span><span class="cmd-desc">Définir le salon des annonces de niveau</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Config_Staff</span><span class="cmd-desc">Définir le rôle staff pour les tickets</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Config</span><span class="cmd-desc">Configurer la langue du serveur (FR/EN/Bilingue)</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Welcome</span><span class="cmd-desc">Alternative pour configurer le message de bienvenue</span><span class="cmd-tag tag-admin">Admin</span></div>
+    </div>
+  </div>
+
+  <!-- COMMANDES DIVERS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📋</div>
+      <h2>Diverses</h2>
+    </div>
+    <div class="cmd-table">
+      <div class="cmd-row"><span class="cmd-name">/Sondage</span><span class="cmd-desc">Créer un sondage avec 2 à 4 choix</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Info</span><span class="cmd-desc">Informations sur le serveur (membres, salons, rôles...)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row"><span class="cmd-name">/Profil</span><span class="cmd-desc">Profil complet d'un membre (niveau, coins, warns, rôles)</span><span class="cmd-tag tag-public">Public</span></div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">❓</div>
+      <h2>Problèmes fréquents</h2>
+    </div>
+    <div class="faq-item">
+      <div class="faq-icon">🔧</div>
+      <div class="faq-content">
+        <strong>Le bot ne répond pas</strong>
+        <p>Vérifie ses permissions — il a besoin d'Administrateur + Gérer les salons</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-icon">🔧</div>
+      <div class="faq-content">
+        <strong>/Site_Live ne charge pas</strong>
+        <p>Vérifie que le webhook "Structura_Link" a bien été créé dans le salon</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-icon">🔧</div>
+      <div class="faq-content">
+        <strong>Erreur "Forbidden"</strong>
+        <p>Le rôle du bot doit être au-dessus des rôles qu'il doit gérer dans la hiérarchie</p>
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-icon">🔧</div>
+      <div class="faq-content">
+        <strong>Quota Gemini dépassé</strong>
+        <p>Le bot passe automatiquement en mode local — la structure sera générée sans IA</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIENS -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔗</div>
+      <h2>Liens utiles</h2>
+    </div>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:8px;">Besoin d'aide ? Rejoins le serveur Discord de support ou consulte les ressources.</p>
+    <div class="btn-group">
       <a href="https://discord.gg/Wab6C5mkZF" class="btn btn-primary" target="_blank">💬 Serveur Discord</a>
       <a href="https://diazarthur355-coder.github.io/teste/" class="btn btn-secondary" target="_blank">🖥️ Dashboard</a>
       <a href="https://github.com/Diazarthur355-coder/Structura-Bot" class="btn btn-secondary" target="_blank">⭐ GitHub</a>
     </div>
   </div>
 
-</div>
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Structura Bot © 2026 — Fait avec ❤️ — <a href="https://github.com/Diazarthur355-coder/Structura-Bot">Open Source</a></p>
+  </div>
 
-<div class="footer">
-  <p>Structura Bot © 2026 — Fait avec ❤️</p>
 </div>
 
 </body>
 </html>'''
 
-# Sauvegarder dans un fichier
-with open('/mnt/agents/output/testttte.html', 'w', encoding='utf-8') as f:
-    f.write(html_updated)
+# Sauvegarder
+with open('/mnt/agents/output/structura_support.html', 'w', encoding='utf-8') as f:
+    f.write(html_final)
 
-print("✅ Fichier mis à jour : /mnt/agents/output/testttte.html")
+print("✅ Site Structura Support généré avec succès !")
+print("📁 Fichier : /mnt/agents/output/structura_support.html")
+print(f"📊 Taille : {len(html_final)} caractères")
