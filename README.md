@@ -1,2 +1,2 @@
 # support 
-https://discord.gg/Wab6C5mkZF
+https://discord.gg/QRVVV2vu6W
