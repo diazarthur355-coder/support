@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+html_updated = '''<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -191,11 +192,11 @@ body {
     <h2>📚 Commandes disponibles</h2>
     <ul>
       <li>💬 <strong>/generer</strong> — Génère une structure de serveur par thème</li>
-      <li>🏗️ <strong>/creer_serveur</strong> — Crée des salons via formulaire</li>
-      <li>📋 <strong>/template</strong> — Applique un template prédéfini</li>
-      <li>🖥️ <strong>/site_live</strong> — Ouvre le dashboard web</li>
-      <li>📤 <strong>/snapshot</strong> — Exporte la structure en fichier</li>
-      <li>🗑️ <strong>/reset_serveur</strong> — Reset total (attention !)</li>
+      <li>🏗️ <strong>/creer_Serveur</strong> — Crée des salons via formulaire</li>
+      <li>📋 <strong>/template</strong> — Applique un Template prédéfini</li>
+      <li>🖥️ <strong>/Site_Live</strong> — Ouvre le dashboard web</li>
+      <li>📤 <strong>/Snapshot</strong> — Exporte la structure en fichier</li>
+      <li>🗑️ <strong>/Reset_Serveur</strong> — Reset total (attention !)</li>
     </ul>
   </div>
 
@@ -203,7 +204,7 @@ body {
     <h2>❓ Problèmes fréquents</h2>
     <ul>
       <li>🔧 <strong>Le bot ne répond pas</strong> → Vérifie ses permissions (Admin + Gérer les salons)</li>
-      <li>🔧 <strong>/site_live ne charge pas</strong> → Vérifie que le webhook a bien été créé</li>
+      <li>🔧 <strong>/Site_Live ne charge pas</strong> → Vérifie que le webhook a bien été créé</li>
       <li>🔧 <strong>Erreur "Forbidden"</strong> → Le bot doit être au-dessus des rôles à gérer</li>
       <li>🔧 <strong>Quota Gemini dépassé</strong> → Le bot passe automatiquement en mode local</li>
     </ul>
@@ -215,6 +216,7 @@ body {
     <div style="margin-top:12px;">
       <a href="https://discord.gg/Wab6C5mkZF" class="btn btn-primary" target="_blank">💬 Serveur Discord</a>
       <a href="https://diazarthur355-coder.github.io/teste/" class="btn btn-secondary" target="_blank">🖥️ Dashboard</a>
+      <a href="https://github.com/Diazarthur355-coder/Structura-Bot" class="btn btn-secondary" target="_blank">⭐ GitHub</a>
     </div>
   </div>
 
@@ -225,4 +227,10 @@ body {
 </div>
 
 </body>
-</html>
+</html>'''
+
+# Sauvegarder dans un fichier
+with open('/mnt/agents/output/testttte.html', 'w', encoding='utf-8') as f:
+    f.write(html_updated)
+
+print("✅ Fichier mis à jour : /mnt/agents/output/testttte.html")
