@@ -1,9 +1,12 @@
 
-html_final = '''<!DOCTYPE html>
+html_mobile = '''<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#0b0f1a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Structura — Support</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -22,15 +25,19 @@ html_final = '''<!DOCTYPE html>
   --text3: #64748b;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ════════════════════════════════════════════════════════
@@ -40,48 +47,62 @@ body {
   position: fixed;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.4;
+  opacity: 0.35;
   pointer-events: none;
   z-index: 0;
-  animation: orbFloat 20s ease-in-out infinite;
+  will-change: transform;
 }
 
 .orb-1 {
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(56,189,248,0.6), transparent 70%);
-  top: -100px; left: -100px;
-  animation-delay: 0s;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(56,189,248,0.7), transparent 70%);
+  top: -80px; left: -80px;
+  animation: orbFloat1 18s ease-in-out infinite;
 }
 
 .orb-2 {
-  width: 350px; height: 350px;
-  background: radial-gradient(circle, rgba(129,140,248,0.5), transparent 70%);
-  bottom: 10%; right: -50px;
-  animation-delay: -7s;
-  animation-duration: 25s;
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, rgba(129,140,248,0.6), transparent 70%);
+  bottom: 15%; right: -60px;
+  animation: orbFloat2 22s ease-in-out infinite;
 }
 
 .orb-3 {
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(34,197,94,0.4), transparent 70%);
-  top: 40%; left: 30%;
-  animation-delay: -14s;
-  animation-duration: 18s;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(34,197,94,0.5), transparent 70%);
+  top: 45%; left: 25%;
+  animation: orbFloat3 16s ease-in-out infinite;
 }
 
 .orb-4 {
-  width: 250px; height: 250px;
-  background: radial-gradient(circle, rgba(251,191,36,0.3), transparent 70%);
-  bottom: -50px; left: 20%;
-  animation-delay: -5s;
-  animation-duration: 22s;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(251,191,36,0.4), transparent 70%);
+  bottom: -40px; left: 15%;
+  animation: orbFloat4 20s ease-in-out infinite;
 }
 
-@keyframes orbFloat {
+@keyframes orbFloat1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(30px, -40px) scale(1.1); }
-  50% { transform: translate(-20px, 30px) scale(0.95); }
-  75% { transform: translate(40px, 20px) scale(1.05); }
+  33% { transform: translate(25px, -30px) scale(1.08); }
+  66% { transform: translate(-15px, 20px) scale(0.95); }
+}
+
+@keyframes orbFloat2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-20px, 25px) scale(1.05); }
+  66% { transform: translate(15px, -15px) scale(0.98); }
+}
+
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, 15px) scale(1.1); }
+  66% { transform: translate(-25px, -20px) scale(0.92); }
+}
+
+@keyframes orbFloat4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-15px, 30px) scale(1.06); }
+  66% { transform: translate(20px, -10px) scale(0.97); }
 }
 
 /* Grille subtile */
@@ -89,9 +110,9 @@ body {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background-image: 
-    linear-gradient(rgba(56,189,248,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56,189,248,0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
+    linear-gradient(rgba(56,189,248,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56,189,248,0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
   pointer-events: none;
   z-index: 1;
 }
@@ -103,7 +124,7 @@ body {
   max-width: 900px;
   width: 100%;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 30px 16px;
   position: relative;
   z-index: 2;
 }
@@ -111,60 +132,56 @@ body {
 /* Header */
 .hero {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
   position: relative;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
+  gap: 6px;
+  padding: 5px 14px;
   border-radius: 50px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  background: rgba(34,197,94,0.1);
+  background: rgba(34,197,94,0.12);
   color: var(--green);
-  border: 1px solid rgba(34,197,94,0.2);
-  margin-bottom: 20px;
-  animation: glowPulse 3s ease-in-out infinite;
+  border: 1px solid rgba(34,197,94,0.25);
+  margin-bottom: 16px;
 }
 
 .hero-badge::before {
   content: '';
-  width: 8px; height: 8px;
+  width: 6px; height: 6px;
   background: var(--green);
   border-radius: 50%;
   animation: dotPulse 2s infinite;
 }
 
-@keyframes glowPulse {
-  0%, 100% { box-shadow: 0 0 5px rgba(34,197,94,0.2); }
-  50% { box-shadow: 0 0 20px rgba(34,197,94,0.4); }
-}
-
 @keyframes dotPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
+  50% { opacity: 0.4; transform: scale(0.7); }
 }
 
 .hero h1 {
-  font-size: 42px;
+  font-size: 28px;
   font-weight: 900;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   background: linear-gradient(135deg, var(--text), var(--accent), var(--accent2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
 .hero p {
   color: var(--text2);
-  font-size: 16px;
-  max-width: 500px;
+  font-size: 14px;
+  max-width: 480px;
   margin: 0 auto;
   line-height: 1.6;
+  padding: 0 10px;
 }
 
 /* ════════════════════════════════════════════════════════
@@ -172,13 +189,13 @@ body {
    ════════════════════════════════════════════════════════ */
 .card {
   background: var(--bg2);
-  border: 1px solid rgba(56,189,248,0.1);
-  border-radius: 16px;
-  padding: 28px;
-  margin-bottom: 20px;
+  border: 1px solid rgba(56,189,248,0.08);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 14px;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
 }
 
 .card::before {
@@ -188,16 +205,12 @@ body {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
   opacity: 0;
-  transition: opacity 0.4s;
+  transition: opacity 0.3s;
 }
 
-.card:hover {
-  border-color: rgba(56,189,248,0.3);
-  transform: translateY(-4px);
-  box-shadow: 
-    0 20px 40px rgba(0,0,0,0.3),
-    0 0 30px rgba(56,189,248,0.1),
-    inset 0 1px 0 rgba(255,255,255,0.05);
+.card:active {
+  transform: scale(0.98);
+  border-color: rgba(56,189,248,0.2);
 }
 
 .card:hover::before {
@@ -207,80 +220,95 @@ body {
 .card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .card-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
+  width: 36px; height: 36px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 18px;
   background: rgba(56,189,248,0.1);
-  border: 1px solid rgba(56,189,248,0.2);
+  border: 1px solid rgba(56,189,248,0.15);
+  flex-shrink: 0;
 }
 
 .card h2 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text);
 }
 
 /* ════════════════════════════════════════════════════════
-   TABLE DES COMMANDES
+   TABLE DES COMMANDES — OPTIMISÉE MOBILE
    ════════════════════════════════════════════════════════ */
 .cmd-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .cmd-row {
   display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  background: rgba(15,22,41,0.6);
+  flex-direction: column;
+  padding: 12px 14px;
+  background: rgba(15,22,41,0.5);
   border-radius: 10px;
-  margin-bottom: 6px;
   border: 1px solid transparent;
-  transition: all 0.3s;
-  cursor: default;
+  transition: all 0.25s;
+  position: relative;
 }
 
 .cmd-row:hover {
-  background: rgba(56,189,248,0.05);
-  border-color: rgba(56,189,248,0.15);
-  transform: translateX(4px);
+  background: rgba(56,189,248,0.04);
+  border-color: rgba(56,189,248,0.12);
+}
+
+.cmd-row:active {
+  background: rgba(56,189,248,0.08);
+}
+
+.cmd-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
 }
 
 .cmd-name {
-  font-family: 'SF Mono', monospace;
-  font-size: 13px;
+  font-family: 'SF Mono', 'Courier New', monospace;
+  font-size: 12px;
   font-weight: 600;
   color: var(--accent);
-  min-width: 180px;
-  padding: 4px 10px;
+  padding: 3px 8px;
   background: rgba(56,189,248,0.08);
-  border-radius: 6px;
+  border-radius: 5px;
   border: 1px solid rgba(56,189,248,0.15);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70%;
 }
 
 .cmd-desc {
   color: var(--text2);
-  font-size: 13px;
-  flex: 1;
-  padding-left: 16px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  padding-right: 4px;
 }
 
 .cmd-tag {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: 4px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  flex-shrink: 0;
 }
 
 .tag-admin { background: rgba(239,68,68,0.15); color: var(--red); }
@@ -291,88 +319,82 @@ body {
    SECTION FAQ
    ════════════════════════════════════════════════════════ */
 .faq-item {
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(148,163,184,0.1);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(148,163,184,0.08);
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
 }
 
 .faq-item:last-child { border-bottom: none; }
 
 .faq-icon {
-  width: 28px; height: 28px;
+  width: 26px; height: 26px;
   border-radius: 6px;
   background: rgba(56,189,248,0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 .faq-content strong {
   color: var(--text);
-  font-size: 14px;
+  font-size: 13px;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .faq-content p {
   color: var(--text2);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
 /* ════════════════════════════════════════════════════════
-   BOUTONS STYLÉS
+   BOUTONS STYLÉS — OPTIMISÉS TACTILE
    ════════════════════════════════════════════════════════ */
 .btn-group {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 16px;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 14px 20px;
   border-radius: 10px;
   text-decoration: none;
   font-weight: 600;
   font-size: 14px;
-  transition: all 0.3s;
+  transition: all 0.2s;
   border: none;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  min-height: 48px;
+  -webkit-touch-callout: none;
+  user-select: none;
 }
 
-.btn::after {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  transition: left 0.5s;
-}
-
-.btn:hover::after {
-  left: 100%;
+.btn:active {
+  transform: scale(0.96);
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent), var(--accent2));
   color: var(--bg);
-  box-shadow: 0 4px 20px rgba(56,189,248,0.3);
+  box-shadow: 0 4px 15px rgba(56,189,248,0.25);
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(56,189,248,0.4);
+.btn-primary:active {
+  box-shadow: 0 2px 8px rgba(56,189,248,0.3);
 }
 
 .btn-secondary {
@@ -381,10 +403,8 @@ body {
   border: 1px solid rgba(148,163,184,0.2);
 }
 
-.btn-secondary:hover {
+.btn-secondary:active {
   background: #253049;
-  border-color: rgba(56,189,248,0.3);
-  transform: translateY(-2px);
 }
 
 /* ════════════════════════════════════════════════════════
@@ -393,57 +413,122 @@ body {
 .footer {
   text-align: center;
   color: var(--text3);
-  font-size: 12px;
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 1px solid rgba(148,163,184,0.1);
+  font-size: 11px;
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(148,163,184,0.08);
+  line-height: 1.6;
 }
 
 .footer a {
   color: var(--accent);
   text-decoration: none;
-  transition: color 0.2s;
 }
 
-.footer a:hover { color: var(--text); }
+.footer a:active { opacity: 0.7; }
 
 /* ════════════════════════════════════════════════════════
    ANIMATIONS ENTRÉE
    ════════════════════════════════════════════════════════ */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .card {
-  animation: fadeInUp 0.6s ease-out forwards;
+  animation: fadeInUp 0.5s ease-out forwards;
   opacity: 0;
 }
 
-.card:nth-child(1) { animation-delay: 0.1s; }
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.3s; }
-.card:nth-child(4) { animation-delay: 0.4s; }
-.card:nth-child(5) { animation-delay: 0.5s; }
-.card:nth-child(6) { animation-delay: 0.6s; }
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6) { animation-delay: 0.3s; }
+.card:nth-child(7) { animation-delay: 0.35s; }
+.card:nth-child(8) { animation-delay: 0.4s; }
+.card:nth-child(9) { animation-delay: 0.45s; }
+.card:nth-child(10) { animation-delay: 0.5s; }
 
 /* ════════════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — TABLETTE & DESKTOP
    ════════════════════════════════════════════════════════ */
-@media (max-width: 600px) {
-  .hero h1 { font-size: 28px; }
-  .cmd-name { min-width: 140px; font-size: 11px; }
-  .cmd-desc { font-size: 12px; }
-  .card { padding: 20px; }
-  .btn-group { flex-direction: column; }
-  .btn { width: 100%; justify-content: center; }
+@media (min-width: 640px) {
+  .container { padding: 40px 24px; }
+  
+  .hero { margin-bottom: 45px; }
+  .hero h1 { font-size: 36px; letter-spacing: -1px; }
+  .hero p { font-size: 15px; }
+  .hero-badge { font-size: 12px; padding: 6px 16px; }
+  
+  .card { padding: 28px; margin-bottom: 18px; }
+  .card:hover {
+    border-color: rgba(56,189,248,0.25);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(56,189,248,0.08);
+  }
+  .card-icon { width: 40px; height: 40px; font-size: 20px; }
+  .card h2 { font-size: 18px; }
+  
+  .cmd-row {
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 16px;
+  }
+  .cmd-top { margin-bottom: 0; flex: 1; }
+  .cmd-name { font-size: 13px; max-width: 200px; }
+  .cmd-desc { font-size: 13px; padding-left: 12px; flex: 1; }
+  .cmd-tag { font-size: 10px; padding: 3px 8px; }
+  
+  .btn-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .btn {
+    width: auto;
+    justify-content: flex-start;
+    padding: 12px 24px;
+    min-height: auto;
+  }
+  
+  .faq-item { padding: 14px 0; }
+  .faq-icon { width: 28px; height: 28px; font-size: 14px; }
+  .faq-content strong { font-size: 14px; }
+  .faq-content p { font-size: 13px; }
+  
+  .orb-1 { width: 400px; height: 400px; }
+  .orb-2 { width: 350px; height: 350px; }
+  .orb-3 { width: 300px; height: 300px; }
+  .orb-4 { width: 250px; height: 250px; }
+}
+
+@media (min-width: 768px) {
+  .hero h1 { font-size: 42px; }
+  .container { padding: 50px 30px; }
+}
+
+/* ════════════════════════════════════════════════════════
+   ACCESSIBILITÉ & PERFORMANCE
+   ════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .orb, .card, .hero-badge::before {
+    animation: none !important;
+  }
+  .card { opacity: 1; }
 }
 
 /* Scrollbar stylisée */
-::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+
+/* Selection */
+::selection {
+  background: rgba(56,189,248,0.3);
+  color: var(--text);
+}
 </style>
 </head>
 <body>
@@ -471,14 +556,38 @@ body {
       <h2>Structure & Serveur</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Generer</span><span class="cmd-desc">Génère une structure de serveur par thème via IA (Gemini)</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Creer_Serveur</span><span class="cmd-desc">Crée des catégories et salons via formulaire modal</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Template</span><span class="cmd-desc">Applique un template prédéfini (gaming, business, school...)</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Build</span><span class="cmd-desc">Crée manuellement des salons (texte libre, legacy)</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Snapshot</span><span class="cmd-desc">Sauvegarde la structure actuelle en fichier texte</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Organise</span><span class="cmd-desc">Trie les salons alphabétiquement dans chaque catégorie</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Site_Live</span><span class="cmd-desc">Génère le lien vers le dashboard web de gestion</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Export_Structure</span><span class="cmd-desc">Exporte l'architecture complète du serveur</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Generer</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Génère une structure de serveur par thème via IA (Gemini)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Creer_Serveur</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Crée des catégories et salons via formulaire modal</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Template</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Applique un template prédéfini (gaming, business, school...)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Build</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Crée manuellement des salons (texte libre, legacy)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Snapshot</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Sauvegarde la structure actuelle en fichier texte</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Organise</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Trie les salons alphabétiquement dans chaque catégorie</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Site_Live</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Génère le lien vers le dashboard web de gestion</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Export_Structure</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Exporte l'architecture complète du serveur</span>
+      </div>
     </div>
   </div>
 
@@ -489,15 +598,42 @@ body {
       <h2>Modération</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Warn</span><span class="cmd-desc">Avertir un membre avec raison</span><span class="cmd-tag tag-mod">Modo</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Warns</span><span class="cmd-desc">Voir l'historique des avertissements d'un membre</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Clear_Warns</span><span class="cmd-desc">Effacer tous les avertissements d'un membre</span><span class="cmd-tag tag-mod">Modo</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Kick</span><span class="cmd-desc">Expulser un membre du serveur</span><span class="cmd-tag tag-mod">Modo</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Ban</span><span class="cmd-desc">Bannir un membre (option suppression messages)</span><span class="cmd-tag tag-mod">Modo</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Unban</span><span class="cmd-desc">Débannir un utilisateur par ID</span><span class="cmd-tag tag-mod">Modo</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Mute</span><span class="cmd-desc">Rendre muet temporairement (timeout)</span><span class="cmd-tag tag-mod">Modo</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Unmute</span><span class="cmd-desc">Retirer le mute d'un membre</span><span class="cmd-tag tag-mod">Modo</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Clear</span><span class="cmd-desc">Supprimer des messages en masse (max 100)</span><span class="cmd-tag tag-mod">Modo</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Warn</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Avertir un membre avec raison</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Warns</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Voir l'historique des avertissements d'un membre</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Clear_Warns</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Effacer tous les avertissements d'un membre</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Kick</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Expulser un membre du serveur</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Ban</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Bannir un membre (option suppression messages)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Unban</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Débannir un utilisateur par ID</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Mute</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Rendre muet temporairement (timeout)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Unmute</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Retirer le mute d'un membre</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Clear</span><span class="cmd-tag tag-mod">Modo</span></div>
+        <span class="cmd-desc">Supprimer des messages en masse (max 100)</span>
+      </div>
     </div>
   </div>
 
@@ -508,9 +644,18 @@ body {
       <h2>Rôles</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Creer_Roles</span><span class="cmd-desc">Crée plusieurs rôles colorés (séparés par virgules)</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Boutons_Roles</span><span class="cmd-desc">Crée un message interactif avec boutons pour obtenir des rôles</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Auto_Role</span><span class="cmd-desc">Configure un rôle attribué automatiquement à l'arrivée</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Creer_Roles</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Crée plusieurs rôles colorés (séparés par virgules)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Boutons_Roles</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Message interactif avec boutons pour obtenir des rôles</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Auto_Role</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Configure un rôle attribué automatiquement à l'arrivée</span>
+      </div>
     </div>
   </div>
 
@@ -521,10 +666,22 @@ body {
       <h2>Suppression (Danger)</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Supprimer_Categories</span><span class="cmd-desc">Supprime toutes les catégories et leurs salons</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Supprimer_Salons</span><span class="cmd-desc">Supprime tous les salons textuels et vocaux</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Supprimer_Roles</span><span class="cmd-desc">Supprime tous les rôles personnalisés</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Reset_Serveur</span><span class="cmd-desc">RESET TOTAL — supprime tout (salons, catégories, rôles)</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Supprimer_Categories</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Supprime toutes les catégories et leurs salons</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Supprimer_Salons</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Supprime tous les salons textuels et vocaux</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Supprimer_Roles</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Supprime tous les rôles personnalisés</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Reset_Serveur</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">RESET TOTAL — supprime tout (salons, catégories, rôles)</span>
+      </div>
     </div>
   </div>
 
@@ -535,8 +692,14 @@ body {
       <h2>XP & Niveaux</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Niveau</span><span class="cmd-desc">Voir ton niveau, XP et barre de progression</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Classement</span><span class="cmd-desc">Classement XP du serveur (Top 10)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Niveau</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Voir ton niveau, XP et barre de progression</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Classement</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Classement XP du serveur (Top 10)</span>
+      </div>
     </div>
   </div>
 
@@ -547,10 +710,22 @@ body {
       <h2>Économie</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Solde</span><span class="cmd-desc">Voir ton solde (portefeuille + banque)</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Daily</span><span class="cmd-desc">Récupère ta récompense quotidienne (100-500 coins)</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Donner</span><span class="cmd-desc">Transférer des coins à un membre</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Rich</span><span class="cmd-desc">Classement des membres les plus riches (Top 10)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Solde</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Voir ton solde (portefeuille + banque)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Daily</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Récupère ta récompense quotidienne (100-500 coins)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Donner</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Transférer des coins à un membre</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Rich</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Classement des membres les plus riches (Top 10)</span>
+      </div>
     </div>
   </div>
 
@@ -561,9 +736,18 @@ body {
       <h2>Tickets</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Setup_Tickets</span><span class="cmd-desc">Configure le système de tickets dans un salon</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">(Bouton)</span><span class="cmd-desc">Ouvrir un ticket — formulaire avec sujet et description</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">(Bouton)</span><span class="cmd-desc">Fermer le ticket — suppression du salon après 5s</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Setup_Tickets</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Configure le système de tickets dans un salon</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">(Bouton)</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Ouvrir un ticket — formulaire avec sujet et description</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">(Bouton)</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Fermer le ticket — suppression du salon après 5s</span>
+      </div>
     </div>
   </div>
 
@@ -574,8 +758,14 @@ body {
       <h2>Giveaway</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Giveaway</span><span class="cmd-desc">Lancer un giveaway avec lot, durée et nombre de gagnants</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">(Réaction 🎉)</span><span class="cmd-desc">Participer au giveaway en cliquant sur la réaction</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Giveaway</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Lancer un giveaway avec lot, durée et nombre de gagnants</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">(Réaction 🎉)</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Participer au giveaway en cliquant sur la réaction</span>
+      </div>
     </div>
   </div>
 
@@ -586,13 +776,34 @@ body {
       <h2>Configuration</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Config_Logs</span><span class="cmd-desc">Définir le salon des logs (messages supprimés/modifiés, bans...)</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Config_Bienvenue</span><span class="cmd-desc">Configurer le message de bienvenue (titre, description, couleur)</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Config_Depart</span><span class="cmd-desc">Définir le salon des messages de départ</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Config_Niveaux</span><span class="cmd-desc">Définir le salon des annonces de niveau</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Config_Staff</span><span class="cmd-desc">Définir le rôle staff pour les tickets</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Config</span><span class="cmd-desc">Configurer la langue du serveur (FR/EN/Bilingue)</span><span class="cmd-tag tag-admin">Admin</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Welcome</span><span class="cmd-desc">Alternative pour configurer le message de bienvenue</span><span class="cmd-tag tag-admin">Admin</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Config_Logs</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Définir le salon des logs (messages supprimés/modifiés, bans...)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Config_Bienvenue</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Configurer le message de bienvenue (titre, description, couleur)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Config_Depart</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Définir le salon des messages de départ</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Config_Niveaux</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Définir le salon des annonces de niveau</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Config_Staff</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Définir le rôle staff pour les tickets</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Config</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Configurer la langue du serveur (FR/EN/Bilingue)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Welcome</span><span class="cmd-tag tag-admin">Admin</span></div>
+        <span class="cmd-desc">Alternative pour configurer le message de bienvenue</span>
+      </div>
     </div>
   </div>
 
@@ -603,9 +814,18 @@ body {
       <h2>Diverses</h2>
     </div>
     <div class="cmd-table">
-      <div class="cmd-row"><span class="cmd-name">/Sondage</span><span class="cmd-desc">Créer un sondage avec 2 à 4 choix</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Info</span><span class="cmd-desc">Informations sur le serveur (membres, salons, rôles...)</span><span class="cmd-tag tag-public">Public</span></div>
-      <div class="cmd-row"><span class="cmd-name">/Profil</span><span class="cmd-desc">Profil complet d'un membre (niveau, coins, warns, rôles)</span><span class="cmd-tag tag-public">Public</span></div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Sondage</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Créer un sondage avec 2 à 4 choix</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Info</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Informations sur le serveur (membres, salons, rôles...)</span>
+      </div>
+      <div class="cmd-row">
+        <div class="cmd-top"><span class="cmd-name">/Profil</span><span class="cmd-tag tag-public">Public</span></div>
+        <span class="cmd-desc">Profil complet d'un membre (niveau, coins, warns, rôles)</span>
+      </div>
     </div>
   </div>
 
@@ -651,7 +871,7 @@ body {
       <div class="card-icon">🔗</div>
       <h2>Liens utiles</h2>
     </div>
-    <p style="color:var(--text2);font-size:14px;margin-bottom:8px;">Besoin d'aide ? Rejoins le serveur Discord de support ou consulte les ressources.</p>
+    <p style="color:var(--text2);font-size:13px;margin-bottom:10px;line-height:1.5;">Besoin d'aide ? Rejoins le serveur Discord de support ou consulte les ressources.</p>
     <div class="btn-group">
       <a href="https://discord.gg/Wab6C5mkZF" class="btn btn-primary" target="_blank">💬 Serveur Discord</a>
       <a href="https://diazarthur355-coder.github.io/teste/" class="btn btn-secondary" target="_blank">🖥️ Dashboard</a>
@@ -661,7 +881,7 @@ body {
 
   <!-- FOOTER -->
   <div class="footer">
-    <p>Structura Bot © 2026 — Fait avec ❤️ — <a href="https://github.com/Diazarthur355-coder/Structura-Bot">Open Source</a></p>
+    <p>Structura Bot © 2026 — Fait avec ❤️<br><a href="https://github.com/Diazarthur355-coder/Structura-Bot">Open Source sur GitHub</a></p>
   </div>
 
 </div>
@@ -671,8 +891,8 @@ body {
 
 # Sauvegarder
 with open('/mnt/agents/output/structura_support.html', 'w', encoding='utf-8') as f:
-    f.write(html_final)
+    f.write(html_mobile)
 
-print("✅ Site Structura Support généré avec succès !")
+print("✅ Site Structura Support optimisé pour mobile !")
 print("📁 Fichier : /mnt/agents/output/structura_support.html")
-print(f"📊 Taille : {len(html_final)} caractères")
+print(f"📊 Taille : {len(html_mobile)} caractères")
